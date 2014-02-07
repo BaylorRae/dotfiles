@@ -1,41 +1,15 @@
 " autoload bundles
 call pathogen#infect()
 
+" use comma as leader instead of backslash
+let mapleader=","
+
+" RVM fails without this
 set shell=/bin/sh
-
-" let rega= @a
-" let t_ti= &t_ti
-" let t_te= &t_te
-" let rs  = &rs
-" set t_ti= t_te= nors
-
-" Allow backgrounding buffers without writing them, and remember marks/undo
-" for backgrounded buffers
-" set hidden
-
-" Keep more context when scrolling off the end of a buffer
-" set scrolloff=3
-
-" force block cursor and disable cursor blink
-set gcr=a-n-v-c:block-Cursor
-set gcr=a-n-v-c:blinkon0
 
 " use a different font
 set guifont=Monaco:h18
 set encoding=utf-8
-
-" line numbers
-set number
-
-" move cursor by display lines
-noremap j gj
-noremap k gk
-
-" don't wait for escape sequence
-set ttimeoutlen=0
-
-" allow backspace over everything in insert mode
-set backspace=indent,eol,start
 
 " change tab widths
 set tabstop=2
@@ -44,9 +18,106 @@ set shiftwidth=2
 set expandtab " use spaces instead of tabs
 set autoindent
 
-" use comma as leader instead of backslash
-let mapleader=","
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLORS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" turn on syntax highlighting
+syntax on
 
+" GRB: set the color scheme
+:set t_Co=256 " 256 colors
+:set background=dark
+colorscheme grb256
+
+if g:colors_name == "solarized"
+  hi clear Visual
+  hi Visual ctermbg=15 guibg=DarkGrey
+endif
+
+if $ITERM_PROFILE == "Teerb"
+  colorscheme xoria256
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SEARCHING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GRB: clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
+
+" GRB: highlighting search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" line numbers
+set number
+set numberwidth=5
+
+" highlight current line
+set cursorline
+
+" force minimum window width
+set winwidth=110
+
+" allow backspace over everything in insert mode
+set backspace=indent,eol,start
+
+" don't wait for escape sequence
+set ttimeoutlen=0
+
+" GRB: store temporary files in a central spot
+" no more *.swp files!
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MISC KEY MAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" Quickly insert hash rocket
+imap <c-L> <space>=><space>
+
+" Better tab navigation
+nnoremap th  :tabprev<CR>
+nnoremap tl  :tabnext<CR>
+nnoremap tn  :tabnew<CR>
+
+" shortcut to text formatting
+map Q gq
+
+" GRB: Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+
+" move cursor by display lines
+noremap j gj
+noremap k gk
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUS LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" use two lines in the prompt
+set cmdheight=2
+:set laststatus=2
+
+" based on Gary Bernhardt's status line
+set statusline=
+set statusline+=%<%f " path/to/file
+set statusline+=\ (%{&ft}) " (file_type)
+set statusline+=%m " have changes been made?
+set statusline+=%= " right aligned
+set statusline+=(%l,%c) " (line,col)
+set statusline+=%-19([%P]%) " percentage through the file
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COMMAND-T SETTINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Refresh the current list of files
 map <leader>f :CommandTFlush<cr>
 
@@ -59,30 +130,6 @@ endif
 
 " CommandT: ignore tmp files
 set wildignore+=*/tmp/*
-
-" highlight current line
-set cursorline
-
-" use two lines in the prompt
-set cmdheight=2
-
-" turn on syntax highlighting
-syntax on
-
-" GRB: highlighting search"
-set hlsearch
-
-" searching
-set incsearch
-set ignorecase
-set smartcase
-set winwidth=110
-
-" GRB: set the color scheme
-:set t_Co=256 " 256 colors
-:set background=dark
-colorscheme grb256
-
 
 " NERDTree toggle
 nmap <C-b> :NERDTreeToggle<cr>
@@ -97,24 +144,89 @@ if &t_Co > 2 || has("gui_running")
   hi CursorLine guifg=#f6f3e8     guibg=#121212       gui=NONE      ctermfg=NONE        ctermbg=234        cterm=NONE
 endif
 
-if has("gui_running")
-  set guioptions-=T
-endif
+" GRB: Open routes.rb at the top of the screen
+map <leader>gr :topleft :split config/routes.rb<cr>
 
-if g:colors_name == "solarized"
-  hi clear Visual
-  hi Visual ctermbg=15 guibg=DarkGrey
-endif
+" GRB: Quick access to rails folders
+map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
 
-if $ITERM_PROFILE == "Teerb"
-  colorscheme xoria256
-endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FILE SYNTAX
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.md set tw=80
+au BufNewFile,BufRead *.coffee set filetype=coffee
+au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
 
-" Quickly insert hash rocket
-imap <c-L> <space>=><space>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM AUTOCMDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
 
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+else
+  set autoindent		" always set autoindenting on
+endif " has("autocmd")
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GRB: RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Align piped tables when a pipe is inserted
+" <https://gist.github.com/287147>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
+endfunction
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GRB: MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InsertTabWrapper()
     let col = col('.') - 1
     if !col || getline('.')[col - 1] !~ '\k'
@@ -126,7 +238,9 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" GRB: turn selected text into a variable
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GRB: EXTRACT VARIABLE (SKETCHY)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! ExtractVariable()
     let name = input("Variable name: ")
     if name == ''
@@ -172,87 +286,18 @@ function! InlineVariable()
 endfunction
 nnoremap <leader>ri :call InlineVariable()<cr>
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-" GRB: clear the search buffer when hitting return
-:nnoremap <CR> :nohlsearch<cr>
-
-" GRB: Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-
-" *.md is read as a markdown file
-au BufNewFile,BufRead *.md set filetype=markdown
-
-" *.coffee is read as a coffeescript file
-au BufNewFile,BufRead *.coffee set filetype=coffee
-
-" *.md has a default text width of 80 characters
-au BufNewFile,BufRead *.md set tw=80
-
-" *.hbs is a handlebars file
-au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
-
-set numberwidth=5
-
-" Open routes.rb at the top of the screen
-map <leader>gr :topleft :split config/routes.rb<cr>
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
-
-" Make sure the status line is visible
-:set laststatus=2
-
-" Better tab navigation
-nnoremap th  :tabprev<CR>
-nnoremap tl  :tabnext<CR>
-nnoremap tn  :tabnew<CR>
-
-" based on Gary Bernhardt's status line
-set statusline=
-set statusline+=%<%f " path/to/file
-set statusline+=\ (%{&ft}) " (file_type)
-set statusline+=%m " have changes been made?
-set statusline+=%= " right aligned
-set statusline+=(%l,%c) " (line,col)
-set statusline+=%-19([%P]%) " percentage through the file
-
-" GRB: store temporary files in a central spot
-" no more *.swp files!
-set backup
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+ :normal! dd
+ :exec '?^\s*it\>'
+ :normal! P
+ :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+ :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
@@ -337,51 +382,6 @@ function! RunTestFile(...)
     call RunTests(t:grb_test_file . command_suffix)
 endfunction
 
+" Run tests
 map <leader>a :call RunTestFile()<cr>
 map <leader>w :w\|:!bundle exec cucumber --profile wip<cr>
-
-" shortcut to text formatting
-map Q gq
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
-endfunction
-map <leader>n :call RenameFile()<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Align piped tables when a pipe is inserted <https://gist.github.com/287147>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
- :normal! dd
- :exec '?^\s*it\>'
- :normal! P
- :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
- :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
