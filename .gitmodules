@@ -22,3 +22,6 @@
 [submodule ".vim/bundle/mustache-handlebars"]
 	path = .vim/bundle/mustache-handlebars
 	url = git://github.com/mustache/vim-mustache-handlebars.git
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
