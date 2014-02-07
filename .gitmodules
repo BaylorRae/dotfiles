@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/vim-matchit"]
 	path = .vim/bundle/vim-matchit
 	url = https://github.com/tsaleh/vim-matchit.git
+[submodule ".vim/bundle/mustache-handlebars"]
+	path = .vim/bundle/mustache-handlebars
+	url = git://github.com/mustache/vim-mustache-handlebars.git
