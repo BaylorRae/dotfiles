@@ -108,7 +108,6 @@ endif
 
 if $ITERM_PROFILE == "Teerb"
   colorscheme xoria256
-  set rtp+=~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 endif
 
 " Quickly insert hash rocket
