@@ -10,9 +10,11 @@
 /.dbshell
 /.dropbox
 /.gem
+/.heroku
 /.irb-history
 /.lesshst
 /.mongorc.js
+/.netrc
 /.npm
 /.psql_history
 /.rnd
