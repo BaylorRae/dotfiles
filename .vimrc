@@ -156,10 +156,10 @@ map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILE SYNTAX
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufNewFile,BufRead *.md set filetype=markdown
-au BufNewFile,BufRead *.md set tw=80
+au BufNewFile,BufRead *.md set filetype=markdown tw=80
 au BufNewFile,BufRead *.coffee set filetype=coffee
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
+au BufRead,BufNewFile *.kit set filetype=kit syntax=html
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
