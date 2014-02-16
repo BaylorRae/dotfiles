@@ -136,6 +136,7 @@ nmap <C-b> :NERDTreeToggle<cr>
 
 " NERDTree options
 let g:NERDTreeWinSize = 36
+let g:NERDTreeQuitOnOpen = 1
 
 " When the terminal has colors, enable syntax+search highlighting
 if &t_Co > 2 || has("gui_running")
