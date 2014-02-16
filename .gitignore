@@ -1,4 +1,6 @@
 *.DS_Store
+/.af_instances
+/.af_token
 /.CFUserTextEncoding
 /.NERDTreeBookmarks
 /.Trash
