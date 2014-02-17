@@ -11,6 +11,7 @@
 /.cups
 /.dbshell
 /.dropbox
+/.gdgipqnrc
 /.gem
 /.heroku
 /.irb-history
@@ -26,6 +27,7 @@
 /.sh_history
 /.ssh
 /.subversion
+/.tbiwaban
 /.vim-fuf-data
 /.vim-tmp
 /.vim/.netr*
