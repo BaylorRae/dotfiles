@@ -1,12 +1,10 @@
 *.DS_Store
 /.af_instances
 /.af_token
-/.CFUserTextEncoding
-/.NERDTreeBookmarks
-/.Trash
 /.adobe
 /.bash_history
 /.cache
+/.CFUserTextEncoding
 /.composer
 /.cups
 /.dbshell
@@ -19,6 +17,7 @@
 /.mongorc.js
 /.mysql_history
 /.netrc
+/.NERDTreeBookmarks
 /.npm
 /.pry_history
 /.psql_history
@@ -28,6 +27,7 @@
 /.ssh
 /.subversion
 /.tbiwaban
+/.Trash
 /.vim-fuf-data
 /.vim-tmp
 /.vim/.netr*
