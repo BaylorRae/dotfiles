@@ -131,10 +131,19 @@ endif
 " CommandT: ignore tmp files
 set wildignore+=*/tmp/*
 
-" NERDTree toggle
-nmap <C-b> :NERDTreeToggle<cr>
+" GRB: Open routes.rb at the top of the screen
+map <leader>gr :topleft :split config/routes.rb<cr>
 
-" NERDTree options
+" GRB: Quick access to rails folders
+map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree OPTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <C-b> :NERDTreeToggle<cr>
 let g:NERDTreeWinSize = 36
 let g:NERDTreeQuitOnOpen = 1
 
@@ -144,15 +153,6 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   hi CursorLine guifg=#f6f3e8     guibg=#121212       gui=NONE      ctermfg=NONE        ctermbg=234        cterm=NONE
 endif
-
-" GRB: Open routes.rb at the top of the screen
-map <leader>gr :topleft :split config/routes.rb<cr>
-
-" GRB: Quick access to rails folders
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILE SYNTAX
