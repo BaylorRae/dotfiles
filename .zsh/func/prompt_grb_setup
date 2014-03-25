@@ -77,7 +77,7 @@ function prompt_grb_scm_time_since_commit() {
 }
 
 function prompt_grb_scm_info() {
-    if zgit_inworktree; then
+    if [ -d .git ]; then
       echo "($(prompt_wunjo_scm_branch)|$(prompt_grb_scm_time_since_commit))"
     fi
 }
