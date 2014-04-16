@@ -31,6 +31,7 @@
 /.subversion
 /.tbiwaban
 /.Trash
+/.vagrant.d
 /.vim-fuf-data
 /.vim-tmp
 /.vim/.netr*
