@@ -37,6 +37,7 @@ export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 alias ls='ls -G'
 alias sr='screen -r'
 alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc'
+alias vs='vagrant ssh'
 
 # find todos
 alias todo='ack "todo" -i'
