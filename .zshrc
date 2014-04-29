@@ -40,7 +40,7 @@ alias jsc='/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/
 alias vs='vagrant ssh'
 
 # find todos
-alias todo='ack "todo" -i'
+alias todo='ack -i "todo"'
 
 #########################################
 # COMMAND HISTORY CONFIGURATION
