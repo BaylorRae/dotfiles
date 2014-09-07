@@ -136,7 +136,7 @@ if filereadable("composer.phar")
 endif
 
 " CommandT: ignore tmp files
-set wildignore+=*/tmp/*
+set wildignore+=tmp/*
 
 " GRB: Open routes.rb at the top of the screen
 map <leader>gr :topleft :split config/routes.rb<cr>
