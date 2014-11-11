@@ -168,6 +168,7 @@ au BufNewFile,BufRead *.md set filetype=markdown tw=80
 au BufNewFile,BufRead *.coffee set filetype=coffee
 au BufRead,BufNewFile *.handlebars,*.hbs set ft=html syntax=handlebars
 au BufRead,BufNewFile *.kit set filetype=kit syntax=html
+au BufRead,BufNewFile *.sbt set filetype=stagebloc syntax=html
 
 au BufEnter *.scss\|kit set nobackup
 au BufLeave *.scss\|kit set backup
