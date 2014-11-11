@@ -26,6 +26,7 @@ zle -N self-insert url-quote-magic
 #########################################
 export PATH=/usr/local/pear/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 export PATH="/usr/games/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH=/usr/local/python
 export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
