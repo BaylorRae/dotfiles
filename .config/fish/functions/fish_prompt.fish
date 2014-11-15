@@ -5,7 +5,7 @@ function fish_prompt
   echo -n 'nedry1'
 
   set_color normal
-  echo -n ':'(basename $PWD)
+  echo -n ':'(zsh -c "print -P %~")
   
   set_color yellow
   echo -n ' 🍍  '
