@@ -3,12 +3,13 @@
 /.af_token
 /.adobe
 /.bash_history
+/.berkshelf
 /.cache
 /.CFUserTextEncoding
 /.chef
 /.cocoapods
 /.composer
-/.config
+/.config/*
 /.cups
 /.dbshell
 /.dropbox
@@ -18,14 +19,17 @@
 /.heroku
 /.irb-history
 /.lesshst
+/.lldb-history
 /.local
 /.mongorc.js
 /.mutt
 /.mysql_history
 /.netrc
 /.NERDTreeBookmarks
+/.node-gyp
 /.npm
 /.pearrc
+/.php_history
 /.pry_history
 /.psql_history
 /.psysh
@@ -38,6 +42,7 @@
 /.subversion
 /.tbiwaban
 /.Trash
+/.travis
 /.vagrant.d
 /.vim-fuf-data
 /.vim-tmp
@@ -67,3 +72,8 @@
 /tmp
 /Work
 /VirtualBox VMs
+
+# Overrides
+!/.config/fish
+/.config/fish/fish_history
+/.config/fish/fishd*
