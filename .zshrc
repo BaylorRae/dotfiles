@@ -81,3 +81,6 @@ bindkey '^N' down-line-or-search
 # Force RVM when entering screen
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 [[ $TERM = "screen" ]] && rvm use default >> /dev/null
+
+# added by travis gem
+[ -f /Users/baylorrae/.travis/travis.sh ] && source /Users/baylorrae/.travis/travis.sh
