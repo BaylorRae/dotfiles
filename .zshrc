@@ -65,6 +65,10 @@ setopt share_history # share command history data
 autoload -U compinit
 compinit
 
+# command highlighting
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
 # case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
