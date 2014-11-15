@@ -15,7 +15,7 @@ function fish_prompt
     # current branch
     echo -n (__fish_git_prompt "%s" | sed 's/ //')
 
-    if git diff --quiet --cached 2>/dev/null; else
+    if git_isindexclean; else
       set_color -o green
       echo -n '+'
     end
