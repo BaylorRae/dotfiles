@@ -76,4 +76,5 @@
 # Overrides
 !/.config/fish
 /.config/fish/fish_history
+/.config/fish/generated_completions
 /.config/fish/fishd*
