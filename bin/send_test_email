@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+"use strict";
+var inquirer = require("/usr/local/lib/node_modules/inquirer"),
+    sh = require("/usr/local/lib/node_modules/execSync"),
+    fs = require('fs'),
+    sys = require('sys'),
+    exec = require('child_process').exec,
+    
+    config = JSON.parse(fs.readFileSync('meta.json', 'utf8'));
+
+function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+inquirer.prompt([
+  {
+    type: "checkbox",
+    message: "Recipients",
+    name: "recipients",
+    choices: config["recipients"],
+    validate: function( answer ) {
+      if ( answer.length < 1 ) {
+        return "You must choose at least one recipient.";
+      }
+      return true;
+    }
+  },
+  {
+    type: "input",
+    name: "subject",
+    message: "Subject",
+    default: config['subject']
+  }
+], function( answers ) {
+  var subject = answers["subject"];
+
+  console.log("[PREMAILER] inlining CSS for email");
+  exec("premailer index.html > index-inline.html", function() {
+    sendEmails(subject, answers["recipients"]);
+  });
+});
+
+function sendEmails(subject, recipients) {
+  var i, email,
+      fromEmail = sh.exec("get-password 'test from email'").stdout,
+      fromPass = sh.exec("get-password 'test from password'").stdout,
+      fromServer = sh.exec("get-password 'test from server'").stdout;
+
+  for( i = 0; i < recipients.length; i++ ) {
+    email = recipients[i];
+    console.log("[SENDEMAIL] sending email to " + email);
+    sh.exec("sendemail -f '" + fromEmail + "' \
+                    -t " + email + " \
+                    -u '[TEST] " + subject + "' \
+                    -o 'message-content-type=html' \
+                    -o 'message-file=index-inline.html' \
+                    -o 'message-charset=UTF8' \
+                    -s '" + fromServer + "' \
+                    -xu '" + fromEmail + "' \
+                    -xp '" + fromPass + "'", puts);
+  }
+}
