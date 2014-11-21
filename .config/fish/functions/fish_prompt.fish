@@ -5,7 +5,7 @@ function fish_prompt
   echo -n 'nedry1'
 
   set_color normal
-  echo -n ':'(zsh -c "print -P %~")
+  echo -n ':'(zsh -c "print -P %1~")
 
   # has .git directory
   if test -d .git
