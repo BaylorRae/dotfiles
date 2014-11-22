@@ -4,7 +4,8 @@
   "description": "scripts and executables for BaylorRae",
   "dependencies": {
     "inquirer": "~0.8.0",
-    "execSync": "~1.0.2"
+    "execSync": "~1.0.2",
+    "progress": "~1.1.8"
   },
   "devDependencies": {},
   "scripts": {

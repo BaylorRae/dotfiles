@@ -6,6 +6,7 @@ var inquirer = require("inquirer"),
     fs = require('fs'),
     sys = require('sys'),
     exec = require('child_process').exec,
+    ProgressBar = require('progress'),
     
     config = JSON.parse(fs.readFileSync('meta.json', 'utf8'));
 
@@ -44,10 +45,18 @@ function sendEmails(subject, recipients) {
       fromEmail = sh.exec("get-password 'test from email'").stdout,
       fromPass = sh.exec("get-password 'test from password'").stdout,
       fromServer = sh.exec("get-password 'test from server'").stdout;
+      
+  console.log("[SENDEMAIL] sending test email to " + recipients.length + " recipients");
+  var bar = new ProgressBar('  sending (:current/:total) [:bar] :percent :elapseds', {
+        complete: '#',
+        incomplete: ' ',
+        width: 30,
+        total: recipients.length
+      });
 
   for( i = 0; i < recipients.length; i++ ) {
     email = recipients[i];
-    console.log("[SENDEMAIL] sending email to " + email);
+    bar.tick();
     sh.exec("sendemail -f '" + fromEmail + "' \
                     -t " + email + " \
                     -u '[TEST] " + subject + "' \
