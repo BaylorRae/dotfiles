@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 "use strict";
-var inquirer = require("/usr/local/lib/node_modules/inquirer"),
-    sh = require("/usr/local/lib/node_modules/execSync"),
+var inquirer = require("inquirer"),
+    sh = require("execSync"),
     fs = require('fs'),
     sys = require('sys'),
     exec = require('child_process').exec,
