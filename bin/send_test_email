@@ -42,7 +42,7 @@ inquirer.prompt([
 
 function sendEmails(subject, recipients) {
   var i, email,
-      fromEmail = sh.exec("get-password 'test from email'").stdout,
+      fromEmail = config['from'] || sh.exec("get-password 'test from email'").stdout,
       fromPass = sh.exec("get-password 'test from password'").stdout,
       fromServer = sh.exec("get-password 'test from server'").stdout;
       
@@ -59,7 +59,7 @@ function sendEmails(subject, recipients) {
     bar.tick();
     sh.exec("sendemail -f '" + fromEmail + "' \
                     -t " + email + " \
-                    -u '[TEST] " + subject + "' \
+                    -u \"[TEST] " + subject + "\" \
                     -o 'message-content-type=html' \
                     -o 'message-file=index-inline.html' \
                     -o 'message-charset=UTF8' \
