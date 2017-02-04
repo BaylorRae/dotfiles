@@ -46,6 +46,7 @@
 /.vagrant.d
 /.vim-fuf-data
 /.vim-tmp
+/.vim/bundle
 /.vim/.netr*
 /.vimfuzzyfinder
 /.viminfo
