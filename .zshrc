@@ -29,7 +29,7 @@ export PATH="/usr/games/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH=/usr/local/python
-export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 #########################################
