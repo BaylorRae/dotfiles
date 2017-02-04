@@ -1,5 +1,7 @@
-" autoload bundles
-call pathogen#infect()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VUNDLE PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.vundlerc.vim
 
 " use comma as leader instead of backslash
 let mapleader=","
