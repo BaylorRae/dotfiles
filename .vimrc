@@ -403,3 +403,11 @@ endfunction
 " Run tests
 map <leader>a :call RunTestFile()<cr>
 map <leader>w :w\|:!bundle exec cucumber --profile wip<cr>
+
+" Operator Mono Italics
+hi htmlArg gui=italic
+hi Comment gui=italic
+hi Type    gui=italic
+hi htmlArg cterm=italic
+hi Comment cterm=italic
+hi Type    cterm=italic
