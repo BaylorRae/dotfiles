@@ -18,6 +18,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on
